@@ -17,11 +17,22 @@ const Playlist = (_ => {
     const render = _ => {
         let markup = '';
 
+        const toggleIcon = itemIndex =>{
+
+          if (currentlyPlayingIndex === itemIndex){
+            return currentSong.paused ? 'fa-play' : 'fa-pause';
+          }
+          else{
+            return 'fa-play';
+          }
+
+        }
+
         songs.forEach((songObj, index) => {
             markup +=  `
-            <li class="playlist__song">
+            <li class="playlist__song ${index === currentlyPlayingIndex ? 'playlist__song--active' : ""}">
               <div class="play-pause">
-                <i class="fa fa-play pp-icon"></i>
+                <i class="fa ${toggleIcon(index)} pp-icon"></i>
               </div>
               <div class="playlist__song-details">
                 <span class="playlist__song-name">${songObj.title}</span>
